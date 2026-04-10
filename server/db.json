@@ -1,6 +1,114 @@
 {
-  "hosts": [],
-  "travellers": [],
-  "offerings": [],
-  "bookings": []
+  "hosts": [
+    {
+      "id": "6bd8325f-745a-42d7-b936-8698d85ecc63",
+      "name": "Sirjan Singh",
+      "email": "sirjan.singh036@gmail.com",
+      "password": "$2a$10$HIpaJaCCUP/G1ckn9P02DehGqXx821OlA63B4FikbjxCGhjD5HPwi",
+      "bio": "ehtsr",
+      "location": "jai",
+      "created_at": "2026-04-10T17:06:35.483Z"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "e96e7688-53c6-42cc-9080-66900880eeb9",
+      "name": "Sirjan's Singh",
+      "email": "23ucs715@lnmiit.ac.in",
+      "password": "$2a$10$1bOYVkImBfufj7LEgHsdNu040jqpsb6fO0lm9c7nV6H76fdOktMuK",
+      "phone": "+626239709755",
+      "created_at": "2026-04-10T17:11:50.468Z"
+    }
+  ],
+  "offerings": [
+    {
+      "id": "56604e2f-c70a-453c-aba0-f4f3f91a0b5e",
+      "host_id": "6bd8325f-745a-42d7-b936-8698d85ecc63",
+      "title": "lonfon",
+      "description": "aja0",
+      "type": "stay",
+      "price": 1500,
+      "location": "jaipur",
+      "images": [],
+      "available_from": "2004-02-11",
+      "available_to": "2005-02-11",
+      "max_guests": 1,
+      "is_customizable": false,
+      "customization_note": null,
+      "created_at": "2026-04-10T17:07:33.879Z"
+    },
+    {
+      "id": "b3007f13-f23a-42bd-aca2-178273a70f07",
+      "host_id": "6bd8325f-745a-42d7-b936-8698d85ecc63",
+      "title": "jknb",
+      "description": "jkni",
+      "type": "stay",
+      "price": 1650,
+      "location": "pl",
+      "images": [],
+      "available_from": null,
+      "available_to": null,
+      "max_guests": 1,
+      "is_customizable": false,
+      "customization_note": null,
+      "created_at": "2026-04-10T17:13:33.757Z"
+    },
+    {
+      "id": "65b4b363-9ef8-48e6-9144-b0d9667e7e9c",
+      "host_id": "6bd8325f-745a-42d7-b936-8698d85ecc63",
+      "title": "ish",
+      "description": "vuyt",
+      "type": "stay",
+      "price": 1900,
+      "location": "pom",
+      "images": [],
+      "available_from": null,
+      "available_to": null,
+      "max_guests": 1,
+      "is_customizable": false,
+      "customization_note": null,
+      "created_at": "2026-04-10T17:15:30.954Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "ce4965dd-e24a-4b21-b256-a94f6e4e741c",
+      "offering_id": "56604e2f-c70a-453c-aba0-f4f3f91a0b5e",
+      "traveller_id": "e96e7688-53c6-42cc-9080-66900880eeb9",
+      "check_in": "2026-04-10",
+      "check_out": "2026-05-10",
+      "guests": 1,
+      "total_price": 45000,
+      "status": "completed",
+      "customization_request": null,
+      "special_notes": "please",
+      "created_at": "2026-04-10T17:12:36.594Z"
+    },
+    {
+      "id": "e0ee9893-7b7e-449a-adaf-d09011b962e2",
+      "offering_id": "b3007f13-f23a-42bd-aca2-178273a70f07",
+      "traveller_id": "e96e7688-53c6-42cc-9080-66900880eeb9",
+      "check_in": null,
+      "check_out": null,
+      "guests": 1,
+      "total_price": 1650,
+      "status": "completed",
+      "customization_request": null,
+      "special_notes": null,
+      "created_at": "2026-04-10T17:13:57.161Z"
+    },
+    {
+      "id": "8184bd55-1124-44ae-9cb7-4f8873956109",
+      "offering_id": "65b4b363-9ef8-48e6-9144-b0d9667e7e9c",
+      "traveller_id": "e96e7688-53c6-42cc-9080-66900880eeb9",
+      "check_in": null,
+      "check_out": null,
+      "guests": 1,
+      "total_price": 1900,
+      "status": "completed",
+      "customization_request": null,
+      "special_notes": null,
+      "created_at": "2026-04-10T17:15:52.936Z"
+    }
+  ]
 }

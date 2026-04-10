@@ -5,8 +5,14 @@ const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
 
+const uploadDir = process.env.DATA_DIR ? path.join(process.env.DATA_DIR, 'uploads') : path.join(__dirname, '../../uploads');
+const fs = require('fs');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, '../../uploads'),
+  destination: uploadDir,
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
     cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
