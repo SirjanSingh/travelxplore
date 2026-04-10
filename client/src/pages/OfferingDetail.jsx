@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import TypeBadge from '../components/TypeBadge';
 import api from '../lib/api';
 import { getUser, isLoggedIn } from '../lib/auth';
-import { formatPrice, formatDate, getOfferingImage } from '../lib/utils';
+import { formatPrice, formatDate, getOfferingImage, resolveImageUrl } from '../lib/utils';
 
 export default function OfferingDetail() {
   const { id } = useParams();
@@ -60,7 +60,7 @@ export default function OfferingDetail() {
             {/* Image gallery */}
             <div className="rounded-2xl overflow-hidden mb-6">
               <img
-                src={images[activeImg]?.startsWith('http') ? images[activeImg] : images[activeImg]}
+                src={resolveImageUrl(images[activeImg])}
                 alt={offering.title}
                 className="w-full h-80 object-cover"
                 onError={e => { e.target.src = getOfferingImage(offering); }}
@@ -73,7 +73,7 @@ export default function OfferingDetail() {
                       onClick={() => setActiveImg(i)}
                       className={`flex-1 h-16 rounded-xl overflow-hidden border-2 cursor-pointer transition-colors ${i === activeImg ? 'border-amber-500' : 'border-transparent'}`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" onError={e => { e.target.src = getOfferingImage(offering); }} />
+                      <img src={resolveImageUrl(img)} alt="" className="w-full h-full object-cover" onError={e => { e.target.src = getOfferingImage(offering); }} />
                     </button>
                   ))}
                 </div>

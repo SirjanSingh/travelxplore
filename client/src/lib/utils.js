@@ -74,11 +74,16 @@ export function getPlaceholderImage(type, index = 0) {
   return imgs[index % imgs.length];
 }
 
+export function resolveImageUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  const backendUrl = 'https://travelxplore.onrender.com';
+  return `${backendUrl}${url}`;
+}
+
 export function getOfferingImage(offering) {
   if (offering.images && offering.images.length > 0) {
-    const img = offering.images[0];
-    if (img.startsWith('http')) return img;
-    return img; // local uploads served by backend
+    return resolveImageUrl(offering.images[0]);
   }
   return getPlaceholderImage(offering.type);
 }

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Upload, X, Info } from 'lucide-react';
 import HostSidebar from '../../components/HostSidebar';
 import api from '../../lib/api';
-import { PLACEHOLDER_IMAGES } from '../../lib/utils';
+import { PLACEHOLDER_IMAGES, resolveImageUrl } from '../../lib/utils';
 
 const TYPES = ['stay', 'experience', 'cuisine', 'product'];
 
@@ -178,7 +178,7 @@ export default function OfferingForm() {
               <div className="flex flex-wrap gap-2 mb-3">
                 {form.images.map((img, i) => (
                   <div key={i} className="relative group">
-                    <img src={img} alt="" className="w-20 h-20 object-cover rounded-xl border border-slate-700" onError={e => { e.target.src = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=200&q=80'; }} />
+                    <img src={resolveImageUrl(img)} alt="" className="w-20 h-20 object-cover rounded-xl border border-slate-700" onError={e => { e.target.src = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=200&q=80'; }} />
                     <button
                       type="button"
                       onClick={() => removeImage(i)}
