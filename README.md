@@ -1,32 +1,37 @@
-# TravelXplore 🗺️
+# TravelXplore
 
-> A modern web platform connecting **travellers** with **local hosts** for authentic cultural experiences — stays, activities, cuisine, and unique handcrafted products.
+> A full-stack web platform connecting **travellers** with **local hosts** for authentic cultural experiences — stays, activities, cuisine, and unique handcrafted products across India.
 
-**Built with:** Node.js · Express · SQLite · React · Vite · Tailwind CSS
+**Live Demo:**
+- Frontend: https://client-one-chi-98.vercel.app
+- Backend API: https://travelxplore.onrender.com
+
+**Built with:** React 18 · Vite · Tailwind CSS · Node.js · Express.js · lowdb · JWT
 
 ---
 
 ## Features
 
 ### For Travellers
-- Browse and search experiences by location, type (stay/experience/cuisine/product)
-- Book stays with date selection
-- Pre-order customized local products
-- Track all bookings in a personal dashboard
-- Cancel pending bookings
+- Browse and search experiences by location and type (Stay / Experience / Cuisine / Product)
+- Book listings with date selection and guest count
+- Pre-order customizable handcrafted products with custom notes
+- Track all bookings and cancel pending ones from a personal dashboard
 
 ### For Local Hosts
-- List offerings: **Stay**, **Experience**, **Cuisine**, **Product**
-- Upload images or add image URLs
-- Enable custom orders for products
-- Manage bookings — confirm, decline, or mark complete
-- Full CRUD on all listings
+- List four types of offerings: **Stay**, **Experience**, **Cuisine**, **Product**
+- Upload up to 5 images per listing (or paste image URLs)
+- Enable customization requests for product listings
+- Manage bookings — confirm, decline, or mark as completed
+- Full CRUD on all listings from a host dashboard
 
 ### Platform
-- JWT-based authentication (separate for host and traveller)
-- SQLite database (zero-config, file-based)
-- File upload support (up to 5 images per offering, 5MB each)
-- Responsive design, dark mode
+- JWT-based authentication — separate roles for Host and Traveller
+- bcrypt password hashing (10 salt rounds)
+- Axios request interceptor for automatic token injection
+- Role-based route guards (RequireAuth) on both frontend and backend
+- Responsive dark-themed UI with glass-morphism design
+- File upload via Multer (5 images max, 5 MB each)
 
 ---
 
@@ -34,39 +39,31 @@
 
 ```
 travelxplore/
-├── server/                    # Express backend
+├── client/                         # React 18 frontend (Vite)
 │   ├── src/
-│   │   ├── index.js           # Entry point
-│   │   ├── db/schema.js       # SQLite schema & connection
-│   │   ├── middleware/auth.js  # JWT middleware
-│   │   └── routes/
-│   │       ├── auth.js        # Register / Login / Profile
-│   │       ├── offerings.js   # CRUD for listings
-│   │       ├── bookings.js    # Booking management
-│   │       └── upload.js      # Image upload
-│   ├── uploads/               # Stored uploaded images
-│   ├── travelxplore.db        # SQLite DB (auto-created)
-│   └── package.json
+│   │   ├── pages/                  # Landing, Auth, Host, Traveller pages
+│   │   ├── components/             # Navbar, OfferingCard, BookingCard
+│   │   ├── lib/
+│   │   │   ├── api.js              # Axios instance + JWT interceptor
+│   │   │   └── utils.js            # TYPE_CONFIG, formatPrice, getOfferingImage
+│   │   └── App.jsx                 # Router + RequireAuth guard
+│   ├── index.css                   # Tailwind base + custom component classes
+│   └── vite.config.js              # Dev proxy: /api and /uploads → :5000
 │
-└── client/                    # React frontend (Vite)
-    ├── src/
-    │   ├── App.jsx             # Routes
-    │   ├── pages/
-    │   │   ├── Landing.jsx
-    │   │   ├── Login.jsx
-    │   │   ├── Signup.jsx
-    │   │   ├── Explore.jsx
-    │   │   ├── OfferingDetail.jsx
-    │   │   ├── host/
-    │   │   │   ├── HostDashboard.jsx
-    │   │   │   ├── HostOfferings.jsx
-    │   │   │   ├── OfferingForm.jsx
-    │   │   │   └── HostBookings.jsx
-    │   │   └── traveller/
-    │   │       └── TravellerDashboard.jsx
-    │   ├── components/         # Shared UI components
-    │   └── lib/                # API client, auth utils
-    └── package.json
+├── server/                         # Express.js backend
+│   └── src/
+│       ├── db/schema.js            # lowdb initialization (JSON file DB)
+│       ├── middleware/auth.js       # JWT verify + requireHost / requireTraveller
+│       ├── routes/
+│       │   ├── auth.js             # Register / Login / Profile
+│       │   ├── offerings.js        # CRUD for listings
+│       │   ├── bookings.js         # Booking lifecycle management
+│       │   └── upload.js           # Multer image upload
+│       └── index.js                # Express app entry point
+│
+├── render.yaml                     # Render deployment config
+├── TravelXplore_Report_Final.docx  # BCA project report
+└── README.md
 ```
 
 ---
@@ -89,109 +86,128 @@ cd travelxplore
 ```bash
 cd server
 npm install
-cp .env.example .env        # Edit JWT_SECRET if needed
-npm run dev                 # Starts on http://localhost:5000
+npm run dev        # Starts on http://localhost:5000
 ```
 
-The SQLite database (`travelxplore.db`) is auto-created on first run.
+`db.json` is auto-created on first run in the `server/` directory.
 
 ### 3. Setup & run the frontend
 
 ```bash
 cd ../client
 npm install
-npm run dev                 # Starts on http://localhost:5173
+npm run dev        # Starts on http://localhost:5173
 ```
 
 Open **http://localhost:5173** in your browser.
+
+> The Vite dev server proxies `/api` and `/uploads` to `localhost:5000` automatically — no CORS issues in development.
 
 ---
 
 ## API Reference
 
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register/host` | Register as host |
-| POST | `/api/auth/register/traveller` | Register as traveller |
-| POST | `/api/auth/login` | Login (pass `role: "host"` or `"traveller"`) |
-| GET  | `/api/auth/me` | Get current user |
-| PUT  | `/api/auth/profile` | Update profile |
+### Auth — `/api/auth`
 
-### Offerings
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET  | `/api/offerings` | List all (filters: `location`, `type`, `search`) |
-| GET  | `/api/offerings/:id` | Get single offering |
-| POST | `/api/offerings` | Create (host only) |
-| PUT  | `/api/offerings/:id` | Update (host, own) |
-| DELETE | `/api/offerings/:id` | Delete (host, own) |
-| GET  | `/api/offerings/host/mine` | Get host's own offerings |
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/register/host` | None | Register a host account |
+| POST | `/register/traveller` | None | Register a traveller account |
+| POST | `/login` | None | Login — pass `role: "host"` or `"traveller"` |
+| GET | `/me` | Bearer token | Get current user profile |
+| PUT | `/profile` | Bearer token | Update profile details |
 
-### Bookings
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/bookings` | Create booking (traveller) |
-| GET  | `/api/bookings/mine` | Traveller's own bookings |
-| GET  | `/api/bookings/host` | All bookings for host's offerings |
-| PATCH | `/api/bookings/:id/status` | Update status (host) |
-| PATCH | `/api/bookings/:id/cancel` | Cancel (traveller) |
+### Offerings — `/api/offerings`
 
-### Upload
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/upload` | Upload images (multipart, field: `images`) |
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET | `/` | None | List all offerings (`?location=`, `?type=`, `?search=`) |
+| GET | `/host/mine` | Host JWT | Get the authenticated host's listings |
+| GET | `/:id` | None | Get a single offering by ID |
+| POST | `/` | Host JWT | Create a new offering |
+| PUT | `/:id` | Host JWT | Update an offering (ownership enforced) |
+| DELETE | `/:id` | Host JWT | Delete an offering (cascades to bookings) |
+
+### Bookings — `/api/bookings`
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/` | Traveller JWT | Create a booking |
+| GET | `/mine` | Traveller JWT | Get the traveller's booking history |
+| GET | `/host` | Host JWT | Get all bookings for the host's offerings |
+| PATCH | `/:id/status` | Host JWT | Set status: `confirmed` / `cancelled` / `completed` |
+| PATCH | `/:id/cancel` | Traveller JWT | Cancel a pending booking |
+
+### Upload — `/api/upload`
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/` | Bearer token | Upload images (`multipart/form-data`, field: `images`, max 5 × 5 MB) |
 
 ---
 
 ## Deployment
 
-### Backend (Railway / Render)
+### Backend — Render
 
-1. Create a new service pointing to the `server/` directory
-2. Set environment variables:
+The `render.yaml` in the repo root handles configuration automatically.
+
+Manual setup:
+1. Create a **Web Service** pointing to the `server/` directory
+2. Build command: `npm install`
+3. Start command: `npm start`
+4. Environment variables:
    ```
-   PORT=5000
-   JWT_SECRET=your-production-secret
    NODE_ENV=production
    CLIENT_URL=https://your-frontend.vercel.app
+   JWT_SECRET=your-strong-secret
    ```
-3. Start command: `npm start`
 
-### Frontend (Vercel)
+> **Note:** On Render's free tier, `db.json` and uploaded images are stored in `/tmp` and reset on service restart. For persistent data, use MongoDB Atlas or Supabase.
 
-1. Import the `client/` directory as a Vercel project
+### Frontend — Vercel
+
+1. Import the repo and set **Root Directory** to `client/`
 2. Build command: `npm run build`
 3. Output directory: `dist`
-4. Add environment variable:
-   ```
-   VITE_API_URL=https://your-backend.railway.app
-   ```
-5. Update `vite.config.js` proxy to point to your backend URL
+4. Vercel auto-deploys on every push to `master`
+
+The frontend calls `https://travelxplore.onrender.com/api` by default. To override, set:
+```
+VITE_API_URL=https://your-backend.onrender.com/api
+```
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + Vite |
-| Styling | Tailwind CSS |
-| Routing | React Router v6 |
-| HTTP Client | Axios |
-| Icons | Lucide React |
-| Backend | Express.js |
-| Database | SQLite (better-sqlite3) |
-| Auth | JWT + bcryptjs |
-| File Upload | Multer |
+| Layer | Technology | Notes |
+|-------|-----------|-------|
+| Frontend | React 18 + Vite | Component-based SPA |
+| Styling | Tailwind CSS v3 | Custom component layer in index.css |
+| Routing | React Router v6 | Role-based RequireAuth guard |
+| HTTP Client | Axios | JWT interceptor, 401 auto-logout |
+| Icons | Lucide React | SVG, tree-shaken |
+| Backend | Express.js 4 | RESTful API, modular routes |
+| Database | lowdb v1 | JSON file DB, zero config |
+| Auth | JWT + bcryptjs | Stateless, 10-round bcrypt hashing |
+| File Upload | Multer | Images only, 5 MB limit |
+| Deployment | Vercel + Render | Frontend + backend split hosting |
 
 ---
 
-## Screenshots
+## Known Limitations
 
-| Landing Page | Explore | Host Dashboard |
-|---|---|---|
-| Dark hero with search | Filter by type/location | Stats + recent bookings |
+- **Ephemeral data:** Render free tier resets `/tmp/db.json` on restart. Register again after a cold start.
+- **Cold start delay:** Render free tier spins down after 15 min of inactivity — first request may take ~30–50 seconds.
+- **No payment gateway:** Bookings are managed in-platform but payments happen outside it.
+- **No admin panel:** No listing approval workflow in this version.
+
+---
+
+## BCA Project Report
+
+A full project report (`TravelXplore_Report_Final.docx`) is included in the repository — covering Introduction, Objectives, SRS, System Design, Tech Stack, Testing, Implementation, Conclusion, Future Scope, and a simple "How It Works" explanation.
 
 ---
 
