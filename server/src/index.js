@@ -29,7 +29,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded files
-const uploadDir = process.env.DATA_DIR ? path.join(process.env.DATA_DIR, 'uploads') : path.join(__dirname, '../../uploads');
+const uploadDir = process.env.NODE_ENV === 'production'
+  ? '/tmp/uploads'
+  : path.join(__dirname, '../../uploads');
 app.use('/uploads', express.static(uploadDir));
 
 // Routes
