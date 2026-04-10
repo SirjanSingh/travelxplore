@@ -5,6 +5,13 @@ services:
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
+    envVars:
+      - key: DATA_DIR
+        value: /data
+      - key: CLIENT_URL
+        value: https://client-one-chi-98.vercel.app
+      - key: NODE_ENV
+        value: production
     disk:
       name: data
       mountPath: /data
