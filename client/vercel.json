@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://travelxplore-server.onrender.com/api/$1"
+      "destination": "https://travelxplore.onrender.com/api/$1"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "https://travelxplore-server.onrender.com/uploads/$1"
+      "destination": "https://travelxplore.onrender.com/uploads/$1"
     },
     {
       "source": "/(.*)",
