@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-6 py-2.5 rounded-xl
+           transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-slate-950
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-slate-800 hover:bg-slate-700 text-slate-100 font-medium px-6 py-2.5 rounded-xl
+           border border-slate-700 transition-all duration-200 cursor-pointer;
+  }
+  .btn-ghost {
+    @apply text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer;
+  }
+  .card {
+    @apply bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden
+           hover:border-slate-600 transition-all duration-300;
+  }
+  .input {
+    @apply w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-slate-100
+           placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500
+           transition-colors duration-200;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-300 mb-1.5;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide;
+  }
+  .badge-stay     { @apply bg-blue-500/20 text-blue-400 border border-blue-500/30; }
+  .badge-experience { @apply bg-purple-500/20 text-purple-400 border border-purple-500/30; }
+  .badge-cuisine  { @apply bg-orange-500/20 text-orange-400 border border-orange-500/30; }
+  .badge-product  { @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-white;
+  }
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
