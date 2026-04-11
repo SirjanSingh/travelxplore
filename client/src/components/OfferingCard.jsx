@@ -39,7 +39,7 @@ export default function OfferingCard({ offering }) {
           <div>
             <span className="text-amber-400 font-bold text-lg">{formatPrice(offering.price)}</span>
             <span className="text-slate-500 text-sm ml-1">
-              {offering.type === 'stay' ? '/night' : offering.type === 'product' ? '/item' : '/person'}
+              {offering.type === 'stay' ? '/night' : '/person'}
             </span>
           </div>
           {offering.host_name && (

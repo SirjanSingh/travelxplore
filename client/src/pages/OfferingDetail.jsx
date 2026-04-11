@@ -44,7 +44,6 @@ export default function OfferingDetail() {
   if (!offering) return null;
 
   const images = offering.images?.length > 0 ? offering.images : [getOfferingImage(offering)];
-  const isProduct = offering.type === 'product';
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -128,7 +127,7 @@ export default function OfferingDetail() {
               <div className="mb-4">
                 <span className="font-display text-3xl font-bold text-amber-400">{formatPrice(offering.price)}</span>
                 <span className="text-slate-400 text-sm ml-1">
-                  {isProduct ? '/item' : offering.type === 'stay' ? '/night' : '/person'}
+                  {offering.type === 'stay' ? '/night' : '/person'}
                 </span>
               </div>
 
@@ -138,7 +137,7 @@ export default function OfferingDetail() {
                     <Star className="w-8 h-8 text-emerald-400" />
                   </div>
                   <h3 className="font-semibold text-white mb-2">
-                    {isProduct ? 'Order Placed!' : 'Booking Confirmed!'}
+                    Booking Confirmed!
                   </h3>
                   <p className="text-slate-400 text-sm mb-4">Check your dashboard for details.</p>
                   <Link to="/traveller/dashboard" className="btn-primary w-full text-center block">
@@ -147,22 +146,18 @@ export default function OfferingDetail() {
                 </div>
               ) : (
                 <form onSubmit={handleBook} className="space-y-4">
-                  {!isProduct && (
-                    <>
-                      <div>
-                        <label className="label flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> Check-in</label>
-                        <input type="date" className="input" value={booking.check_in} onChange={e => setBooking({ ...booking, check_in: e.target.value })} min={new Date().toISOString().split('T')[0]} />
-                      </div>
-                      <div>
-                        <label className="label flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> Check-out</label>
-                        <input type="date" className="input" value={booking.check_out} onChange={e => setBooking({ ...booking, check_out: e.target.value })} min={booking.check_in || new Date().toISOString().split('T')[0]} />
-                      </div>
-                    </>
-                  )}
+                  <div>
+                    <label className="label flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> Check-in</label>
+                    <input type="date" className="input" value={booking.check_in} onChange={e => setBooking({ ...booking, check_in: e.target.value })} min={new Date().toISOString().split('T')[0]} />
+                  </div>
+                  <div>
+                    <label className="label flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> Check-out</label>
+                    <input type="date" className="input" value={booking.check_out} onChange={e => setBooking({ ...booking, check_out: e.target.value })} min={booking.check_in || new Date().toISOString().split('T')[0]} />
+                  </div>
                   <div>
                     <label className="label flex items-center gap-1">
                       <Users className="w-3.5 h-3.5" />
-                      {isProduct ? 'Quantity' : 'Guests'}
+                      Guests
                     </label>
                     <input type="number" min="1" max={offering.max_guests || 20} className="input" value={booking.guests} onChange={e => setBooking({ ...booking, guests: e.target.value })} />
                   </div>
@@ -187,7 +182,7 @@ export default function OfferingDetail() {
                     <p className="text-slate-400 text-sm text-center">Hosts cannot book offerings.</p>
                   ) : (
                     <button type="submit" disabled={bookingLoading} className="btn-primary w-full h-12">
-                      {bookingLoading ? 'Processing...' : isProduct ? 'Place Pre-Order' : 'Book Now'}
+                      {bookingLoading ? 'Processing...' : 'Book Now'}
                     </button>
                   )}
                 </form>

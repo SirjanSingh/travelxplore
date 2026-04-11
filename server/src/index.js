@@ -52,5 +52,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`TravelXplore server running on http://localhost:${PORT}`);
+  console.log(`LocalExplore server running on http://localhost:${PORT}`);
 });

@@ -27,13 +27,6 @@ const FEATURES = [
     bg: 'bg-purple-500/10',
   },
   {
-    icon: Package,
-    title: 'Local Products',
-    desc: 'Pre-order handmade crafts, artisan foods, and cultural goods — delivered fresh.',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
-  },
-  {
     icon: Shield,
     title: 'Trusted & Safe',
     desc: 'Verified hosts, secure payments, and a community built on trust.',
@@ -83,7 +76,7 @@ export default function Landing() {
             <span className="text-amber-400 block">the Tourist Trail</span>
           </h1>
           <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Connect with local hosts for genuine cultural experiences — stays, activities, cuisine, and handcrafted products you won't find anywhere else.
+            Connect with local hosts for genuine cultural experiences — stays, activities, and cuisine you won't find anywhere else.
           </p>
 
           {/* Search bar */}
@@ -126,7 +119,7 @@ export default function Landing() {
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="section-title mb-4">Why TravelXplore?</h2>
+            <h2 className="section-title mb-4">Why LocalExplore?</h2>
             <p className="text-slate-400 text-lg max-w-xl mx-auto">More than a booking platform — a bridge between travellers and the soul of a place.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -226,9 +219,9 @@ export default function Landing() {
             <div className="w-7 h-7 bg-amber-500 rounded-lg flex items-center justify-center">
               <MapPin className="w-3.5 h-3.5 text-slate-950" strokeWidth={2.5} />
             </div>
-            <span className="font-display font-bold text-white">TravelXplore</span>
+            <span className="font-display font-bold text-white">LocalExplore</span>
           </div>
-          <p className="text-slate-500 text-sm">© 2025 TravelXplore. Built for authentic travel experiences.</p>
+          <p className="text-slate-500 text-sm">© 2025 LocalExplore. Built for authentic travel experiences.</p>
           <div className="flex items-center gap-4 text-sm text-slate-500">
             <Link to="/explore" className="hover:text-slate-300 transition-colors">Explore</Link>
             <Link to="/signup?type=host" className="hover:text-slate-300 transition-colors">Host</Link>

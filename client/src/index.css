@@ -43,7 +43,6 @@
   .badge-stay     { @apply bg-blue-500/20 text-blue-400 border border-blue-500/30; }
   .badge-experience { @apply bg-purple-500/20 text-purple-400 border border-purple-500/30; }
   .badge-cuisine  { @apply bg-orange-500/20 text-orange-400 border border-orange-500/30; }
-  .badge-product  { @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
   .section-title {
     @apply font-display text-3xl md:text-4xl font-bold text-white;
   }

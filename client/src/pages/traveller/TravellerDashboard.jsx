@@ -114,7 +114,6 @@ export default function TravellerDashboard() {
             <div className="space-y-4">
               {filtered.map(b => {
                 const sc = STATUS_CONFIG[b.status] || STATUS_CONFIG.pending;
-                const isProduct = b.offering_type === 'product';
                 return (
                   <div key={b.id} className="card p-5">
                     <div className="flex flex-wrap gap-4">
@@ -139,7 +138,7 @@ export default function TravellerDashboard() {
                         </div>
                         <p className="text-slate-400 text-sm mt-1">Host: {b.host_name}</p>
 
-                        {!isProduct && (b.check_in || b.check_out) && (
+                        {(b.check_in || b.check_out) && (
                           <div className="flex items-center gap-1 text-slate-400 text-sm mt-1">
                             <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
                             <span>{formatDate(b.check_in)} — {formatDate(b.check_out)}</span>

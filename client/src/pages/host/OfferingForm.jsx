@@ -5,7 +5,7 @@ import HostSidebar from '../../components/HostSidebar';
 import api from '../../lib/api';
 import { PLACEHOLDER_IMAGES, resolveImageUrl } from '../../lib/utils';
 
-const TYPES = ['stay', 'experience', 'cuisine', 'product'];
+const TYPES = ['stay', 'experience', 'cuisine'];
 
 const EMPTY = {
   title: '', description: '', type: 'stay', price: '',
@@ -115,8 +115,8 @@ export default function OfferingForm() {
             <label className="label">Offering Type *</label>
             <div className="grid grid-cols-4 gap-3">
               {TYPES.map(t => {
-                const icons = { stay: '🏠', experience: '🎭', cuisine: '🍲', product: '🛍️' };
-                const labels = { stay: 'Stay', experience: 'Experience', cuisine: 'Cuisine', product: 'Product' };
+                const icons = { stay: '🏠', experience: '🎭', cuisine: '🍲' };
+                const labels = { stay: 'Stay', experience: 'Experience', cuisine: 'Cuisine' };
                 return (
                   <button
                     key={t}
@@ -213,35 +213,7 @@ export default function OfferingForm() {
             </div>
           </div>
 
-          {/* Product customization */}
-          {form.type === 'product' && (
-            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <Info className="w-4 h-4 text-emerald-400" />
-                <span className="font-medium text-emerald-400">Product Customization</span>
-              </div>
-              <label className="flex items-center gap-3 mb-4 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.is_customizable}
-                  onChange={e => setForm({ ...form, is_customizable: e.target.checked })}
-                  className="w-4 h-4 accent-amber-500"
-                />
-                <span className="text-slate-300 text-sm">Allow travellers to request custom orders</span>
-              </label>
-              {form.is_customizable && (
-                <div>
-                  <label className="label">Customization Details</label>
-                  <textarea
-                    className="input resize-none h-20"
-                    placeholder="Describe what you can customize (e.g. embroidery names, colors, flavors)..."
-                    value={form.customization_note}
-                    onChange={e => setForm({ ...form, customization_note: e.target.value })}
-                  />
-                </div>
-              )}
-            </div>
-          )}
+
 
           <div className="flex gap-4 pt-2">
             <button type="submit" disabled={saving} className="btn-primary px-8 h-12">

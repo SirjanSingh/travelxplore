@@ -22,7 +22,7 @@ export default function Navbar() {
           <MapPin className="w-4 h-4 text-slate-950" strokeWidth={2.5} />
         </div>
         <span className="font-display font-bold text-lg text-white group-hover:text-amber-400 transition-colors">
-          TravelXplore
+          LocalExplore
         </span>
       </Link>
 

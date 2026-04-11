@@ -9,9 +9,7 @@ import api from '../lib/api';
 const TYPES = [
   { value: 'all', label: 'All' },
   { value: 'stay', label: 'Stays' },
-  { value: 'experience', label: 'Experiences' },
   { value: 'cuisine', label: 'Cuisine' },
-  { value: 'product', label: 'Products' },
 ];
 
 export default function Explore() {
@@ -72,7 +70,7 @@ export default function Explore() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search experiences, cuisine, products..."
+                placeholder="Search experiences, cuisine..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 className="input pl-10"

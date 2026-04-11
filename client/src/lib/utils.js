@@ -19,14 +19,6 @@ export const TYPE_CONFIG = {
     icon: 'utensils',
     color: 'text-orange-400',
     bg: 'bg-orange-500/20',
-  },
-  product: {
-    label: 'Product',
-    badge: 'badge-product',
-    icon: 'package',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/20',
-  },
 };
 
 export const STATUS_CONFIG = {

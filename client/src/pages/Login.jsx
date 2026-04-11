@@ -41,7 +41,7 @@ export default function Login() {
           <div className="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center">
             <MapPin className="w-5 h-5 text-slate-950" strokeWidth={2.5} />
           </div>
-          <span className="font-display font-bold text-xl text-white">TravelXplore</span>
+          <span className="font-display font-bold text-xl text-white">LocalExplore</span>
         </Link>
         <div className="relative z-10">
           <h2 className="font-display text-4xl font-bold text-white mb-4">
@@ -60,7 +60,7 @@ export default function Login() {
             <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
               <MapPin className="w-4 h-4 text-slate-950" strokeWidth={2.5} />
             </div>
-            <span className="font-display font-bold text-white">TravelXplore</span>
+            <span className="font-display font-bold text-white">LocalExplore</span>
           </Link>
 
           <h1 className="font-display text-3xl font-bold text-white mb-2">Sign in</h1>
