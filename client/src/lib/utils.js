@@ -19,6 +19,7 @@ export const TYPE_CONFIG = {
     icon: 'utensils',
     color: 'text-orange-400',
     bg: 'bg-orange-500/20',
+  },
 };
 
 export const STATUS_CONFIG = {
@@ -53,11 +54,6 @@ export const PLACEHOLDER_IMAGES = {
     'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=800&q=80',
     'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80',
     'https://images.unsplash.com/photo-1476224203421-9ac39bcb3df1?w=800&q=80',
-  ],
-  product: [
-    'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80',
-    'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
-    'https://images.unsplash.com/photo-1519682577862-22b62b24cb12?w=800&q=80',
   ],
 };
 
