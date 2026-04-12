@@ -14,6 +14,8 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  'https://localxplore.vercel.app',
+  'https://client-one-chi-98.vercel.app',
   'http://localhost:5173',
   'http://localhost:4173',
 ].filter(Boolean);

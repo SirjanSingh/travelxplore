@@ -7,6 +7,6 @@ services:
     startCommand: npm start
     envVars:
       - key: CLIENT_URL
-        value: https://client-one-chi-98.vercel.app
+        value: https://localxplore.vercel.app
       - key: NODE_ENV
         value: production
